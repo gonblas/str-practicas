@@ -21,40 +21,42 @@ En un sistema de tiempo real con las siguientes tareas:
 
 La utilización total se calcula como:
 
-\[
+$$
 U = \sum_{i=1}^{n} \frac{C_i}{T_i}
-\]
+$$
 
 Cálculo por tarea:
 
-- A: \(1/10 = 0.1\)  
-- B: \(3/12 = 0.25\)  
-- C: \(7/20 = 0.35\)  
-- D: \(1/5  = 0.2\)  
+- A: $\(1/10 = 0.1\)$  
+- B: $\(3/12 = 0.25\)$  
+- C: $\(7/20 = 0.35\)$  
+- D: $\(1/5  = 0.2\)$  
 
-\[
+$$
 U = 0.1 + 0.25 + 0.35 + 0.2 = 0.9
-\]
+$$
 
 Comprobamos las condiciones para aplicar cada planificación:
 
-- **Rate Monotonic (RMS):** Límite de Liu & Layland para 4 tareas:  
-  \[
-  U_\text{RMS} = 4(2^{1/4}-1) \approx 0.7568
-  \]
+- **Rate Monotonic (RMS):** Límite de Liu & Layland para 4 tareas:
+  
+$$
+U_\text{RMS} = 4(2^{1/4}-1) \approx 0.7568
+$$
 
   Comparación:
 
-  \[
-  U = 0.9 > 0.7568
-  \]
+$$
+U = 0.9 > 0.7568
+$$
 
   Con RMS **no hay garantía de planificación**.
 
-- **Earliest Deadline First (EDF):** Condición: \(U \le 1\)  
-  \[
-  U = 0.9 \le 1
-  \]
+- **Earliest Deadline First (EDF):** Condición: $\(U \le 1\)$
+-   
+$$
+U = 0.9 \le 1
+$$
 
   Con EDF **sí es planificable**.
 
@@ -64,30 +66,30 @@ Comprobamos las condiciones para aplicar cada planificación:
 
 Determinar período principal (hiperperíodo)
 
-\[
+$$
 H = \text{MCM}(10, 12, 20, 5) = 60
-\]
+$$
 
 
 Determinar tamaño de periodo secundario
 
-- Máximo tiempo de ejecución: \(C_\text{max} = 7\) → \(f \ge 7\)  
-- Probar \(f = 10\) (una opción razonable, mayor o igual a 7 y múltiplo práctico):
+- Máximo tiempo de ejecución: $\(C_\text{max} = 7\) → \(f \ge 7\)$  
+- Probar $\(f = 10\)$ (una opción razonable, mayor o igual a 7 y múltiplo práctico):
 
-Verificación de la condición: \(2f - MCD(T_i, f) \le D_i\)
+Verificación de la condición: $\(2f - MCD(T_i, f) \le D_i\)$
 
-| Tarea | C_i | T_i | 2f - MCD(T_i, f) | D_i | Cumple? |
+| Tarea | $C_i$ | $T_i$ | $2f - MCD(T_i, f)$ | $D_i$ | Cumple? |
 |-------|-----|-----|-----------------|-----|---------|
 | A     | 1   | 10  | 20 - MCD(10,10)=20-10=10 | 10  | ✅ |
 | B     | 3   | 12  | 20 - MCD(12,10)=20-2=18  | 12  | ❌ |
 | C     | 7   | 20  | 20 - MCD(20,10)=20-10=10 | 20  | ✅ |
 | D     | 1   | 5   | 20 - MCD(5,10)=20-5=15   | 5   | ❌ |
 
-- Resultado: \(f = 10\) **no cumple** para todas las tareas.  
-- Probar \(f = 5\) (menor, pero ≥ C_max? C_max=7 → 5<7 ❌).  
-- Probar \(f = 15\) (≥ C_max=7):
+- Resultado: $\(f = 10\)$ **no cumple** para todas las tareas.  
+- Probar $\(f = 5\)$ (menor, pero ≥ C_max? C_max=7 → 5<7 ❌).  
+- Probar $\(f = 15\) (≥ C_\text{max}=7)$:
 
-| Tarea | 2f - MCD(T_i,f) | D_i | Cumple? |
+| Tarea | $2f - MCD(T_i,f)$ | $D_i$ | Cumple? |
 |-------|-----------------|-----|---------|
 | A     | 30 - MCD(10,15)=30-5=25 | 10 | ❌ |
 | B     | 30 - MCD(12,15)=30-3=27 | 12 | ❌ |
