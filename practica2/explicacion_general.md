@@ -49,9 +49,9 @@ El algoritmo **Deadline Monotonic (DM)** es una extensión de RM que permite man
 
 - Es idéntico a RM, pero se generaliza al caso en que:
 
-  $$
-  D_i \leq T_i
-  $$
+$$
+D_i \leq T_i
+$$
 
 - La asignación de prioridades se hace en **orden inverso a los plazos relativos**:
 
@@ -82,9 +82,9 @@ El algoritmo **Least Laxity First (LLF)** asigna prioridades en función de la *
 
 - La **laxidad** de una tarea en un instante \$t\$ se define como:
 
-  $$
-  Laxity = Deadline\ Absoluto - Tiempo\ Actual - Tiempo\ de\ Ejecución\ Restante
-  $$
+$$
+Laxity = Deadline\ Absoluto - Tiempo\ Actual - Tiempo\ de\ Ejecución\ Restante
+$$
 
 - La prioridad más alta se asigna a la tarea con **menor holgura**.
 - En otras palabras:
