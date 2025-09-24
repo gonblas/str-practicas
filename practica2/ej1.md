@@ -19,9 +19,9 @@ En un sistema de tiempo real con las siguientes tareas:
 
 El factor de utilización (fracción de la CPU que se utiliza en el sistema) se calcula como:
 
-\[
+$$
 U = \sum_{i=1}^{N} \frac{C_i}{T_i}
-\]
+$$
 
 Cálculo por tarea:
 
@@ -30,23 +30,23 @@ Cálculo por tarea:
 - C: \(2/6 = 0.3333\)
 - D: \(1/3 = 0.3333\)
 
-\[
+$$
 U = 0.1667 + 0.0833 + 0.3333 + 0.3333 = 0.9166
-\]
+$$
 
 Comprobamos las condiciones para aplicar cada planificación:
 
 - **Rate Monotonic (RMS):** Límite de utilizabilidad de Liu & Layland para 4 tareas:
 
-  \[
-  U\_\text{RMS} = n(2^{1/n}-1) = 4(2^{1/4}-1) \approx 0.7568
-  \]
+  $$
+  U_\text{RMS} = n(2^{1/n}-1) = 4(2^{1/4}-1) \approx 0.7568
+  $$
 
   Comparación:
 
-  \[
+  $$
   U = 0.9166 > 0.7568
-  \]
+  $$
 
   Con RMS **no hay garantía de planificación**.
 
@@ -54,9 +54,9 @@ Comprobamos las condiciones para aplicar cada planificación:
 
   Condición: \(U \le 1\)
 
-  \[
+  $$
   U = 0.9166 \le 1
-  \]
+  $$
 
   Con EDF **sí es planificable**.
 
@@ -68,16 +68,16 @@ Determinamos el período principal (hiperperíodo)
 
 El **hiperperíodo** (ciclo completo tras el cual las tareas se repiten) \(H\) es el **mínimo común múltiplo (MCM)** de todos los períodos de todas las tareas:
 
-\[
+$$
 H = \text{MCM}(3, 6, 12, 24) = 24
-\]
+$$
 
 
 El **Período secundario** \(f\) debe cumplir estas condiciones:
 
 1. \(f \ge \text{máximo tiempo de ejecución}\) → \(f \ge 2\)
 2. Cada período divisible por \(f\) o \((2f - MCD(T_i, f)) \le D_i\)
-3. Frame entero dentro del hiperperíodo: \(H/f\) debe ser entero
+3. Frame entero dentro del hiperperíodo: \(H/f\) debe ser entero.
 
 **Elegimos**: \(f = 2\) unidades
 

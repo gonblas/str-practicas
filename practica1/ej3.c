@@ -1,11 +1,9 @@
 #include <htc.h>
 
-// Ajustá el config según tu proyecto/simulador
 __CONFIG(FOSC_HS & WDTE_OFF & PWRTE_ON & CP_OFF);
 
 #define _XTAL_FREQ 4000000UL
 
-// Macros para los latchs (RD6, RD7)
 #define LATCH1 PORTDbits.RD6
 #define LATCH2 PORTDbits.RD7
 
