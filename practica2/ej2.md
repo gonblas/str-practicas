@@ -22,7 +22,7 @@ En un sistema de tiempo real con las siguientes tareas:
 La utilización total se calcula como:
 
 $$
-U = \sum_{i=1}^{n} \frac{C_i}{T_i}
+  U = \sum_{i=1}^{n} \frac{C_i}{T_i}
 $$
 
 Cálculo por tarea:
@@ -33,7 +33,7 @@ Cálculo por tarea:
 - D: $1/5  = 0.2$
 
 $$
-U = 0.1 + 0.25 + 0.35 + 0.2 = 0.9
+  U = 0.1 + 0.25 + 0.35 + 0.2 = 0.9
 $$
 
 Comprobamos las condiciones para aplicar cada planificación:
@@ -41,13 +41,13 @@ Comprobamos las condiciones para aplicar cada planificación:
 - **Rate Monotonic (RMS):** Límite de Liu & Layland para 4 tareas:
 
   $$
-  U_\text{RMS} = 4(2^{1/4}-1) \approx 0.7568
+    U_\text{RMS} = 4(2^{1/4}-1) \approx 0.7568
   $$
 
   Comparación:
 
   $$
-  U = 0.9 > 0.7568
+    U = 0.9 > 0.7568
   $$
 
   Con RMS **no hay garantía de planificación**.
@@ -55,7 +55,7 @@ Comprobamos las condiciones para aplicar cada planificación:
 - **Earliest Deadline First (EDF):** Condición: $U \le 1$
 
   $$
-  U = 0.9 \le 1
+    U = 0.9 \le 1
   $$
 
   Con EDF **sí es planificable**.
@@ -67,7 +67,7 @@ Comprobamos las condiciones para aplicar cada planificación:
 Determinar período principal (hiperperíodo)
 
 $$
-H = \text{MCM}(10, 12, 20, 5) = 60
+  H = \text{MCM}(10, 12, 20, 5) = 60
 $$
 
 Determinar tamaño de periodo secundario

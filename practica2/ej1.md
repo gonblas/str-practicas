@@ -39,13 +39,13 @@ Comprobamos las condiciones para aplicar cada planificación:
 - **Rate Monotonic (RMS):** Límite de utilizabilidad de Liu & Layland para 4 tareas:
 
   $$
-  U_\text{RMS} = n(2^{1/n}-1) = 4(2^{1/4}-1) \approx 0.7568
+    U_\text{RMS} = n(2^{1/n}-1) = 4(2^{1/4}-1) \approx 0.7568
   $$
 
   Comparación:
 
   $$
-  U = 0.9166 > 0.7568
+    U = 0.9166 > 0.7568
   $$
 
   Con RMS **no hay garantía de planificación**.
@@ -55,7 +55,7 @@ Comprobamos las condiciones para aplicar cada planificación:
   Condición: \(U \le 1\)
 
   $$
-  U = 0.9166 \le 1
+    U = 0.9166 \le 1
   $$
 
   Con EDF **sí es planificable**.
@@ -69,7 +69,7 @@ Determinamos el período principal (hiperperíodo)
 El **hiperperíodo** (ciclo completo tras el cual las tareas se repiten) \(H\) es el **mínimo común múltiplo (MCM)** de todos los períodos de todas las tareas:
 
 $$
-H = \text{MCM}(3, 6, 12, 24) = 24
+  H = \text{MCM}(3, 6, 12, 24) = 24
 $$
 
 
