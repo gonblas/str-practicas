@@ -96,3 +96,48 @@ Verificación de la condición: $2f - MCD(T_i, f) \le D_i$
   | D     | 30 - MCD(5,15)=30-5=25  | 5     | No      |
 
 > **Conclusión:** **No hay un tamaño de frame que cumpla la regla estricta para todas las tareas**, porque hay tareas muy cortas con deadlines pequeños y una tarea muy larga (C=7).
+
+
+
+**Plan cíclico con partición de la tarea C:**
+
+- Particionamos la tarea C (7) en **C1 = 4** y **C2 = 3**, ambas con período y plazo 20.  
+- Hiperperíodo:  
+
+\[
+H = \text{mcm}(10,12,20,5) = 60
+\]
+
+- Tamaño de frame:  
+  - \(C_{\max} = 4\).  
+  - Probamos divisores de 60.  
+  - \(f = 5\) cumple todas las condiciones:  
+    \[
+    2f - \gcd(T_i,f) \le D_i \quad \forall i
+    \]  
+
+- Número de frames por hiperperíodo:  
+
+\[
+N = \frac{H}{f} = \frac{60}{5} = 12
+\]
+
+
+### Tabla del ejecutivo cíclico (f = 5, 12 frames)
+
+| Frame | Intervalo | Tareas asignadas | Carga total |
+|-------|-----------|------------------|-------------|
+| 0     | [0–5)     | D(1), A(1), B(3)     | 5 |
+| 1     | [5–10)    | D(1), C1(4)          | 5 |
+| 2     | [10–15)   | D(1), A(1), C2(3)    | 5 |
+| 3     | [15–20)   | D(1), B(3)           | 4 |
+| 4     | [20–25)   | D(1), C1(4)          | 5 |
+| 5     | [25–30)   | D(1), A(1), C2(3)    | 5 |
+| 6     | [30–35)   | D(1), A(1), B(3)     | 5 |
+| 7     | [35–40)   | D(1), B(3)           | 4 |
+| 8     | [40–45)   | D(1), C1(4)          | 5 |
+| 9     | [45–50)   | D(1), A(1), C2(3)    | 5 |
+| 10    | [50–55)   | D(1), A(1), B(3)     | 5 |
+| 11    | [55–60)   | D(1)                 | 1 |
+
+

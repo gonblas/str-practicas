@@ -11,6 +11,7 @@ void main(void)
    // como tiene pull-up externo preguntamos por si alguno de los valores es cero y eso permite continuar la ejecución
    while ((PORTA & 0b00000011) == 0b00000011)
       ;
+   RB5 = 0;
    while (1)
    {
       __delay_ms(250);
