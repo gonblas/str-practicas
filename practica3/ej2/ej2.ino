@@ -13,11 +13,11 @@ void setup() {
 
   xTaskCreate(
     TaskPrint,          // Function that implements the task.
-    "Task1",           // Text name for the task.
-    128,               // Stack size in words, not bytes.
-    (void*)"Task1",   // Parameter passed into the task.
-    1,                 // Priority at which the task is created.
-    NULL);             // Pointer to the task created in the system.
+    "Task1",            // Text name for the task.
+    128,                // Stack size in words, not bytes.
+    (void*)"Task1",     // Parameter passed into the task.
+    1,                  // Priority at which the task is created.
+    NULL);              // Pointer to the task created in the system.
 
   xTaskCreate(
     TaskPrint,
@@ -34,6 +34,8 @@ void setup() {
     (void*)"Task3",
     5,
     NULL);
+
+  vTaskStartScheduler();
 }
 
 void loop() {}
