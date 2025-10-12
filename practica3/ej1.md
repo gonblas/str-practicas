@@ -16,8 +16,6 @@ En FreeRTOS, existen diferentes funciones que permiten la creación y el manejo 
 
 - **vTaskDelay()**: Esta función permite que una tarea se bloquee durante un período de tiempo específico, permitiendo que otras tareas se ejecuten.
 
-- **vTaskDelay()**: Esta función permite que una tarea se bloquee durante un período de tiempo específico, permitiendo que otras tareas se ejecuten.
-
 - **vTaskDelayUntil()**: Esta función permite que una tarea se bloquee hasta un momento específico en el tiempo, lo que es útil para tareas periódicas.
 
 - **vTaskSuspend()**: Esta función suspende una tarea, impidiendo que se ejecute hasta que sea reanudada.
