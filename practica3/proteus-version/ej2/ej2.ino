@@ -10,12 +10,11 @@ void TaskPrint(void *pvParameters);
 void setup() {
   Serial.begin(9600);
 
-
   xTaskCreate(
     TaskPrint,          // Function that implements the task.
     "Task1",            // Text name for the task.
     128,                // Stack size in words, not bytes.
-    (void*)"Task1",     // Parameter passed into the task.
+    (void*)"Tarea 1",   // Parameter passed into the task.
     1,                  // Priority at which the task is created.
     NULL);              // Pointer to the task created in the system.
 
@@ -23,16 +22,16 @@ void setup() {
     TaskPrint,
     "Task2",
     128,
-    (void*)"Task2",
-    10,
+    (void*)"Tarea 2",
+    3,
     NULL);
 
   xTaskCreate(
     TaskPrint,
     "Task3",
     128,
-    (void*)"Task3",
-    5,
+    (void*)"Tarea 3",
+    2,
     NULL);
 
   vTaskStartScheduler();
@@ -44,7 +43,7 @@ void TaskPrint(void *pvParameters) {
   char* taskName = (char*) pvParameters;
 
   for (;;) {
-    Serial.println("Hello from FreeRTOS Task: " + String(taskName));
+    Serial.println(String(taskName));
     vTaskDelay(100);
   }
 }

@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Arduino_FreeRTOS.h>
 
 void TaskPrint(void *pvParameters);
@@ -38,7 +39,7 @@ void setup()
       "TaskManager",
       128,
       NULL,
-      10,
+      1,
       NULL);
 
   vTaskStartScheduler();
@@ -62,16 +63,19 @@ void TaskManager(void *pvParameters)
 {
   const TickType_t d = pdMS_TO_TICKS(500);
   for (;;)
-  {
-    // xTaskNotifyGive(hT1); vTaskDelay(d);
-    // xTaskNotifyGive(hT3); vTaskDelay(d);
-    // xTaskNotifyGive(hT2); vTaskDelay(d);
+  { 
+    Serial.println("-------Secuencia A-------");
+    xTaskNotifyGive(hT1); vTaskDelay(d);
+    xTaskNotifyGive(hT3); vTaskDelay(d);
+    xTaskNotifyGive(hT2); vTaskDelay(d);
 
-    // xTaskNotifyGive(hT2); vTaskDelay(d);
-    // xTaskNotifyGive(hT2); vTaskDelay(d);
-    // xTaskNotifyGive(hT3); vTaskDelay(d);
-    // xTaskNotifyGive(hT1); vTaskDelay(d);
-  
+    Serial.println("-------Secuencia B-------");
+    xTaskNotifyGive(hT2); vTaskDelay(d);
+    xTaskNotifyGive(hT2); vTaskDelay(d);
+    xTaskNotifyGive(hT3); vTaskDelay(d);
+    xTaskNotifyGive(hT1); vTaskDelay(d);
+
+    Serial.println("-------Secuencia C-------");
     xTaskNotifyGive(hT3); vTaskDelay(d);
     xTaskNotifyGive(hT3); vTaskDelay(d);
     xTaskNotifyGive(hT3); vTaskDelay(d);
