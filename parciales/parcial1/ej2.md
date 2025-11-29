@@ -1,5 +1,33 @@
 **2) Complete las prioridades de las tareas. Además, complete la política de cada una de las tareas y el quantum. Realice una explicación del porqué de su respuesta.**
 
-Dado que en el primer periodo comienza ejecutando TASK_1, TASK_2 y luego TASK_3, y en el segundo periodo es TASK_3, TASK_1 y TASK_2, no existe una diferencia de prioridad entre las tareas. Pongo prioridad igual a 10 a todas.
+En el diagrama se observa que, durante el primer período, el orden de ejecución es TASK_1 -> TASK_2 -> TASK_3, mientras que en el segundo período el orden cambia a TASK_3 -> TASK_1 -> TASK_2.
+Si existiera una diferencia de prioridades, la tarea con mayor prioridad debería ejecutarse primero en todos los períodos. Como esto no ocurre, puede concluirse que las tres tareas tienen la misma prioridad.
+Por lo tanto, asignamos a todas: 
 
-Como todas las tareas tienen la misma prioridad, una tarea no puede sacar a otra por tener mas prioridad, pero se ve que las tareas son cortadas. Esto se debe a que utilizan Round Robin (RR) con un quantum de 2, esto se ve en la TASK_2 cuando solo ejecuta por dos instantes de tiempo quedandole uno restante. Lo mismo para la TASK_3, y claro que tambien para la TASK_1 que solo tiene capacity de 2. En la TASK_3 que tiene 4 ciclos seguidos se debe a que si bien se agoto su quantum, al ser la única tarea que queda por finalizar, vuelve a entrar al procesador para ejecutar y por ello, utiliza dos quantums seguidos.
+TASK_1 -> Priority = 100  
+TASK_2 -> Priority = 100  
+TASK_3 -> Priority = 100
+
+**¿Que planificador se utiliza?**
+
+Como todas las tareas tienen la misma prioridad, ninguna puede interrumpir a otra por prioridad más alta. Sin embargo, en la línea de tiempo se observa que las tareas sí son interrumpidas antes de finalizar su ejecución, lo que indica que la política utilizada no es FIFO (que ejecutaría una tarea completa sin cortes) sino **Round Robin (RR)**.
+
+En Round Robin, el procesador asigna a cada tarea un tiempo fijo de ejecución llamado: **Quantum o time slice**. Durante ese tiempo, la tarea ejecuta de forma ininterrumpida. Cuando el quantum se agota, la tarea se detiene y vuelve a la cola, cediendo el procesador a la siguiente tarea del mismo nivel de prioridad. En el gráfico se ve claramente que las tareas ejecutan de a 2 unidades de tiempo antes de ser interrumpidas, incluso cuando aún les queda computación pendiente.
+Por lo tanto, el quantum es:
+
+Quantum = 2
+
+En particular:
+- TASK_3 también es interrumpida a las 2 unidades, pero más adelante se ve un tramo de 4 unidades seguidas. Esto no contradice el quantum: en ese momento era la única tarea que quedaba sin completar, por lo que ejecutó su quantum, volvió a entrar inmediatamente en la cola, y recibió el procesador de nuevo sin esperar, sumando dos quantums consecutivos.
+- En el segundo período, TASK_2 aparece ejecutando solo 1 unidad. Esto no significa que cambió el quantum, sino que ya había consumido 1 unidad de su quantum anterior antes de ser interrumpida, por lo que solo le quedaba 1 unidad para terminar.
+
+
+**¿Por qué el primer período empieza con TASK_1 y no con otra?**
+
+Dado que las tareas tienen la misma prioridad y todas liberan su instancia al mismo tiempo (start = 0, release periódica cada 10), el planificador necesita un criterio de desempate.
+
+Lo habitual es que seleccione la tarea:
+- según el orden de creación, o
+- según el orden de aparición en la cola del sistema
+
+Por eso el primer período comienza con TASK_1, luego sigue TASK_2 y finalmente TASK_3.
