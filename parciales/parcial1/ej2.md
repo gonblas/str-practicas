@@ -1,0 +1,5 @@
+**2) Complete las prioridades de las tareas. Además, complete la política de cada una de las tareas y el quantum. Realice una explicación del porqué de su respuesta.**
+
+Dado que en el primer periodo comienza ejecutando TASK_1, TASK_2 y luego TASK_3, y en el segundo periodo es TASK_3, TASK_1 y TASK_2, no existe una diferencia de prioridad entre las tareas. Pongo prioridad igual a 10 a todas.
+
+Como todas las tareas tienen la misma prioridad, una tarea no puede sacar a otra por tener mas prioridad, pero se ve que las tareas son cortadas. Esto se debe a que utilizan Round Robin (RR) con un quantum de 2, esto se ve en la TASK_2 cuando solo ejecuta por dos instantes de tiempo quedandole uno restante. Lo mismo para la TASK_3, y claro que tambien para la TASK_1 que solo tiene capacity de 2. En la TASK_3 que tiene 4 ciclos seguidos se debe a que si bien se agoto su quantum, al ser la única tarea que queda por finalizar, vuelve a entrar al procesador para ejecutar y por ello, utiliza dos quantums seguidos.
