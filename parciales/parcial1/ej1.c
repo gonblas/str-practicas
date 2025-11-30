@@ -7,35 +7,35 @@ void interrupt ISR(void)
 	{
 		TMR0 = 12;
 		T0IF = 0;
+
 		PORTB <<= 1;
 		if (PORTB == 0x00)
-			PORTB = 0x01;
+		{
+			PORTB = 0x01; // reinicia secuencia (mejor)
+			T0IE = 0;			// detiene desplazamiento
+		}
 	}
 }
 
 void main(void)
 {
-	TRISA |= (1 << 0); // entrada RA0
-	TRISB = 0x00;	   // salidas
+	TRISA = 0b00000001; // RA0 entrada
+	TRISB = 0x00;				// RB como salida
 	PORTB = 0x00;
 
-	OPTION_REG = 0b00000111;
+	OPTION_REG = 0b00000111; // prescaler 1:256
 	TMR0 = 12;
 
-	// espero primer presión para iniciar
-	while ((PORTA & 0b00000001) != 0)
-		;
-	PORTB = 0x01;
-
-	// habilito interrupciones globales
-	GIE = 1;
-	T0IF = 0;
+	T0IF = 0; // limpio bandera de Timer0
+	GIE = 1;	// habilito interrupciones globales
+	T0IE = 0; // deshabilito Timer0 por ahora
 
 	while (1)
 	{
-		if ((PORTA & 0b00000001) == 0) // pulsador presionado
-			T0IE = 1;				   // se mueve la secuencia
-		else
-			T0IE = 0; // se congela la secuencia
+		while (RA0 == 1)
+			; // espera hasta que el botón se suelte
+
+		PORTB = 0x01; // empieza con el primer bit encendido
+		T0IE = 1;			// habilita Timer0 para desplazamiento
 	}
 }
