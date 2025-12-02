@@ -1,0 +1,52 @@
+#include <Arduino.h>
+#include <Arduino_FreeRTOS.h>
+#include <semphr.h>
+
+#define HIGH_PRIORITY 2
+#define LOW_PRIORITY 1
+#define HIGH_DELAY_MS 100
+#define LOW_DELAY_MS 50
+
+SemaphoreHandle_t sem;
+
+volatile int counter = 0;
+
+void High_Priority_Task(); 
+void Low_Priority_Task();
+
+
+void setup() {
+  Serial.begin(9600);
+  sem = xSemaphoreCreateBinary();
+  xSemaphoreGive(sem);
+  xTaskCreate(High_Priority_Task, "High Priority Task", 1000, NULL, HIGH_PRIORITY, NULL);
+  xTaskCreate(Low_Priority_Task, "Low Priority Task 1", 1000, NULL, LOW_PRIORITY, NULL);
+  xTaskCreate(Low_Priority_Task, "Low Priority Task 2", 1000, NULL, LOW_PRIORITY, NULL);
+
+  vTaskStartScheduler();
+}
+
+void loop() { }
+
+
+void High_Priority_Task() {
+  for(;;) {
+    xSemaphoreTake(sem, portMAX_DELAY);
+    counter++;
+    xSemaphoreGive(sem);
+    vTaskDelay(HIGH_DELAY_MS / portTICK_PERIOD_MS);
+  }
+}
+
+void Low_Priority_Task() {
+  char* name = pcTaskGetName(NULL);
+  for(;;) {
+    xSemaphoreTake(sem, portMAX_DELAY);
+    Serial.print(name);
+    Serial.print(": ");
+    Serial.println(counter);
+    counter+=2;
+    xSemaphoreGive(sem);
+    vTaskDelay(LOW_DELAY_MS / portTICK_PERIOD_MS);
+  }
+}

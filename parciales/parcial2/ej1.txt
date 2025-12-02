@@ -1,0 +1,36 @@
+#include <htc.h>
+#define _XTAL_FREQ 1000000
+
+void interrupt ISR(void) {
+  if(T0IF){
+    T0IF = 0;
+    TMR0 = 12;
+
+    PORTB <<= 1;
+    if(PORTB == 0x00) {
+      PORTB = 0x01;
+      T0IE = 0;
+    }
+  }
+}
+
+void main(void) {
+  TRISA = 0x01;
+  TRISB = 0x00;
+  PORTB = 0x00;
+
+  OPTION_REG = 0b00000111;
+  TMR0 = 12;
+
+  T0IE = 0;
+  GIE = 1;
+  T0IF = 0;
+
+  while(1) {
+    while(RA0 == 1);
+    if(PORTB == 0x00) {
+      PORTB = 0x01;
+    }
+    T0IE = 1;
+  }
+}

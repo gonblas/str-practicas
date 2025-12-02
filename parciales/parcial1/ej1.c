@@ -11,7 +11,7 @@ void interrupt ISR(void)
 		PORTB <<= 1;
 		if (PORTB == 0x00)
 		{
-			PORTB = 0x01; // reinicia secuencia (mejor)
+			PORTB = 0x01; // reinicia secuencia
 			T0IE = 0;			// detiene desplazamiento
 		}
 	}
@@ -26,16 +26,17 @@ void main(void)
 	OPTION_REG = 0b00000111; // prescaler 1:256
 	TMR0 = 12;
 
-	T0IF = 0; // limpio bandera de Timer0
 	GIE = 1;	// habilito interrupciones globales
 	T0IE = 0; // deshabilito Timer0 por ahora
+	T0IF = 0; // limpio bandera de Timer0
 
 	while (1)
 	{
 		while (RA0 == 1)
-			; // espera hasta que el botón se suelte
-
-		PORTB = 0x01; // empieza con el primer bit encendido
+			; // espera hasta que el botón se presione
+		if(PORTB == 0x00){
+			PORTB = 0x01;
+		}
 		T0IE = 1;			// habilita Timer0 para desplazamiento
 	}
 }

@@ -1,0 +1,9 @@
+**Análisis de prioridad:**
+
+En la planificación de la figura se puede ver como en ambos periodos se ejecutan siempre primero las primeras dos tareas (task_1 y task_2), lo cual indica que tienen una mayor prioridad respecto a la tercera y cuarta. Entre las primeras dos, en el primer periodo comienza ejecutando una y en el segundo periodo la otra, lo cual indica que entre ellas dos tienen la misma prioridad. Se le asigna una prioridad de 100 (lo cual cumple que es mayor a 50). Respecto a las últimas dos tareas, se repite el mismo patrón que para las primeras dos tareas, por lo que ambas tienen misma prioridad (igual a 50).
+
+**Análisis de políticas de las tareas:**
+
+Para las primeras dos tareas se puede ver como en el primer periodo se ejecutan sin interrupciones, pero en el segundo periodo la task_2 se ve interrumpida por la task_1, dado que tienen misma prioridad, esto solo puede suceder si tienen una política de Round Robin (RR). Como las task_1 no se ve interrumpida el quantum mínimo es de 2, y dado que la task_2 si se ve interrumpida a su sexto ciclo de ejecución, podemos concluir que el quantum puede ser de 2 o 6. Notar que si el quantum es de 2, la task_2 termina su quantum dos veces en el primer periodo, pero no es interrumpida porque es la tarea con mayor prioridad en ese momento.
+
+Respecto a las políticas de las últimas dos tareas, vemos como ninguna es interrumpida, pero el orden en el cuál se ejecutan en ambos periodos cambia. Esto solo puede deberse a una política Round Robin (RR), ya que si fuese FIFO se ejecutarían en el mismo orden en ambos periodos. El quantum del RR es aquel que permite ejecutar ambas tareas dos veces seguidas, por lo tanto, el quantum de ambas tareas es de 6.

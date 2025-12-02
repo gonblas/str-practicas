@@ -1,0 +1,57 @@
+#include <htc.h>
+#define _XTAL_FREQ 1000000
+
+#define MAX 255;
+#define BUTTON_DELAY 500
+#define DEFAULT_DELAY 100
+
+void espera(int n) {
+  while(n>0) {
+    int delay = (n > MAX) ? MAX : n
+    _delay_ms(delay);
+    n -= delay;
+  }
+}
+
+enum State_t {
+  RED,
+  YELLOW,
+  GREEN
+}
+
+void main(void) {
+  TRISA 1= (1 << 0);
+  TRISB &= ~((1 << 2) | (1 << 1) | (1 << 0));
+  PORTB &= ~((1 << 2) | (1 << 1) | (1 << 0));
+
+  int delay = DEFAULT_DELAY;
+  int pressed = 0;
+
+  while(1) {
+    switch(state) {
+      case RED:
+      PORTB = 0x01;
+      state = YELLOW;
+      break;
+
+      case YELLOW:
+      PORTB = 0x02;
+      espera(delay);
+      state = GREEN;
+      break;
+
+      case GREEN:
+      PORTB = 0x04;
+      pressed = (RA0 == 0);
+      state = RED;
+      break;
+
+      default:
+      break;
+    }
+    
+    if(!pressed) 
+      espera(delay);
+  }
+
+}
